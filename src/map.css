@@ -1,3 +1,15 @@
-rect{
-    padding: black;
+.svg-container{
+    fill: black;
+}
+.modebar-btn--logo{
+    display: none;
+}
+[data-title="Pan"]{
+    display: none;
+}
+[data-title="Toggle show closest data on hover"]{
+    display: none;
+}
+[data-title="Download plot as a png"]{
+    display: none;
 }

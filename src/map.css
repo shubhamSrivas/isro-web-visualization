@@ -1,3 +1,26 @@
+.svg-container{
+    fill: black;
+}
+.modebar-btn--logo{
+    display: none;
+}
+[data-title="Pan"]{
+    display: none;
+}
+[data-title="Toggle show closest data on hover"]{
+    display: none;
+}
+/* [data-title="Download plot as a png"]{
+    display: none;
+} */
 rect{
-    padding: black;
+    z-index: -900;
+}
+body{
+    background-color: black;
+    overflow-x: hidden;
+}
+#clickinfo{
+    color: #ccc !important;
+    margin-bottom: 20px;
 }

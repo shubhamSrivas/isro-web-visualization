@@ -82,8 +82,7 @@ class Map extends Component {
                             publications.push(tmp); tmp = "";
                         }
                         else tmp = tmp + cur[j];
-                    }
-                }
+
                 // sets the hover text
                 var hovertext_tmp = "<b>" + data[i].name + "</b><br>(<b> Radius of Ascension: </b>" + ra_txt.toFixed(2) * -1 + "°,<b> Declination: </b>" + dec_tmp.toFixed(2) + "° )<br><b>Observed by Astrosat: </b>" + str;
                 var detailtext_tmp = hovertext_tmp;
@@ -228,7 +227,7 @@ class Map extends Component {
         });
     }
 
-     /*Function to display the info of a clicked star so that info can be copied */
+    /*Function to display the info of a clicked star so that info can be copied */
     handleClick = (e) => {
         var idx = e.points[0].pointIndex;
         var name = e.points[0].data.name;
@@ -277,6 +276,16 @@ class Map extends Component {
 
                     <div id="infoarea">
                     </div>
+                    <Plot
+                        style={{
+                            height: '100vh',
+                            width: '98vw',
+                            cursor: 'context-menu',
+                        }}
+                        data={this.state.mytrace}
+                        layout={mylayout}
+                        onClick={(data)=> this.handleClick(data)}
+                    />
                 </div>
             );
         }

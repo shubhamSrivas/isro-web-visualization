@@ -15,6 +15,7 @@
 [data-title="Toggle show closest data on hover"]{
     display: none;
 }
+
 [data-title="Lasso Select"]{
     display: none;
 }
@@ -24,10 +25,19 @@
 .legendtoggle {
     z-index: -900;
     outline: none;
+/* [data-title="Box Select"]{
+    display: none;
+} */
+[data-title="Lasso Select"]{
+    display: none;
+
 }
+/* [data-title="Download plot as a png"]{
+    display: none;
+} */
 body{
     background-color: black;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
 }
 .hidden {
     display: none;

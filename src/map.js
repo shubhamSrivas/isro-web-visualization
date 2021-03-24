@@ -13,7 +13,7 @@ class Map extends Component {
     }
     componentDidMount(){
         
-        csv("https://gist.githubusercontent.com/shubhamSrivas/4ad348e4ae6df449a6c1e957bfb246d9/raw/5ada0c3bd922e4269baa109aa43db529248240db/totxbcatalogue.csv").then(data=>{
+        csv("https://gist.githubusercontent.com/shubhamSrivas/4ad348e4ae6df449a6c1e957bfb246d9/raw/ce2bcf5bb4e0558e29d0b166d11755fec1547e04/totxbcatalogue.csv").then(data=>{
                 
         var ras0=[],decs0=[],mags0=[],hovs0=[];
         var ras1=[],decs1=[],mags1=[],hovs1=[];
@@ -52,8 +52,18 @@ class Map extends Component {
                 }
             }
             //
-            var hovertext_tmp = "<b>"+data[i].name+"</b><br>(<b> RA: </b>"+ra_txt.toFixed(2)*-1+"°,<b> Dec: </b>"+dec_tmp.toFixed(2)+"° )<br><b>Observed by Astrosat: </b>"+str+"<br><b>Publications:</b><br> ";
+            var hovertext_tmp = "<b>"+data[i].name+"</b><br>(<b> RA: </b>"+ra_txt.toFixed(2)*-1+"°,<b> Dec: </b>"+dec_tmp.toFixed(2)+"° )<br><b>Observed by Astrosat: </b>"+str;
 
+            if(parseFloat(data[i].isObserved)===1){
+                hovertext_tmp+="<br><b>Observation Date: </b>"+data[i].Observation_Start_Date;
+                hovertext_tmp+="<br><b>Observation Time: </b>"+data[i].Observation_Start_Time;
+                hovertext_tmp+="<br><b>Observation ID: </b>"+data[i].Observation_ID;
+                hovertext_tmp+="<br><b>Proposal ID: </b>"+ data[i].Proposal_ID;
+                hovertext_tmp+="<br><b>Target ID: </b>"+ data[i].Target_ID;
+                hovertext_tmp+="<br><b>Source Name: </b>"+ data[i].Source_Name;
+                hovertext_tmp+="<br><b>Prime Instrument: </b>"+ data[i].Prime_Instrument;
+            }
+            hovertext_tmp+="<br><b>Publications:</b><br> ";
             for( let i=0;i<publications.length;i++){
                 hovertext_tmp+="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
                 hovertext_tmp+=publications[i]+"<br>";
@@ -80,7 +90,6 @@ class Map extends Component {
                     lat: decs0,
                     text: hovs0,
                     hoverinfo: 'text',
-                    selectedinfo: 'text',
                     arrangement: 'fixed',
                     marker: {
                     symbol: 'circle',
@@ -99,8 +108,7 @@ class Map extends Component {
                     symbol: 'circle',
                     size: 4
                     }
-            },
-            { // Grid RA
+            },{ // Grid RA
                 type: 'scattergeo',
                 mode: 'text',
                 lon: grid_ra_x, 
@@ -112,10 +120,9 @@ class Map extends Component {
                     color: '#fff'
                 },
                 textposition: grid_ra_textposition,
-                arrangement: 'fixed',
+                arrangement: 'perpendicular',
                 showlegend: false
-            },
-            { // Grid Dec
+            },{ // Grid Dec
                 type: 'scattergeo',
                 mode: 'text',
                 lon: grid_dec_x, 
@@ -127,9 +134,16 @@ class Map extends Component {
                     color: '#fff'
                 },
                 textposition: grid_dec_textposition,
+                arrangement: 'perpendicular',
                 showlegend: false
             }]}) 
         });
+    }
+    handleClick = (e) => {
+        var idx=e.points[0].pointIndex;
+        console.log(e.points[0].data.text[idx])
+        document.getElementById('clickinfo').innerHTML=e.points[0].data.text[idx];
+        window.scrollBy(0,document.body.scrollHeight || document.documentElement.scrollHeight)
     }
     render() {
         if(this.state.mytrace.length===0){
@@ -146,8 +160,9 @@ class Map extends Component {
                         }}
                         data={this.state.mytrace}
                         layout={mylayout}
+                        onClick={(data)=> this.handleClick(data)}
                     />
-                    {/* {console.log(this.state.mytrace)} */}
+                    <div id="clickinfo"></div>
                 </div>
             );
         }

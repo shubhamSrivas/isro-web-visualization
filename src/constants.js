@@ -1,16 +1,21 @@
+//Radius of Ascension i.e. Longitude data..
 var grid_ra_x = [-180,-150,-120,-90,-60,-30,0,30,60,90,120,150];
 var grid_ra_y = [0,0,0,0,0,0,0,0,0,0,0,0,0];
 var grid_ra_hovtext = ['180°','150°','120°','90°','60°','30°','0°','330°','300°','270°','240°','210°'];
 var grid_ra_textposition = ['middle center', 'middle center', 'middle center', 'middle center', 'middle center', 'middle center', 'middle center', 'middle center', 'middle center', 'middle center', 'middle center', 'middle center'];
+
+//Declination i.e. latitude data
 var grid_dec_x = [0,0,0,0,0,0,0];
 var grid_dec_y = [-90,-60,-30,0,30,60,90];
 var grid_dec_hovtext = ['-90°','-60°','-30°','0°','+30°','+60°','+90°'];
 var grid_dec_textposition = ['top center', 'middle center', 'middle center', 'middle center', 'middle center', 'middle center', 'bottom center'];
+
+// configuration for the plot
 var mylayout={
     title:{
         text: 'High Mass And Low Mass Xray Binaries',
         font:{
-            color: '#ddd',
+            color: '#fff',
         }
     },
     dragmode: 'zoom',

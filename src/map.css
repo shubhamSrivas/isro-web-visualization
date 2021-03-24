@@ -10,15 +10,18 @@
 [data-title="Toggle show closest data on hover"]{
     display: none;
 }
+/* [data-title="Box Select"]{
+    display: none;
+} */
+[data-title="Lasso Select"]{
+    display: none;
+}
 /* [data-title="Download plot as a png"]{
     display: none;
 } */
-rect{
-    z-index: -900;
-}
 body{
     background-color: black;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
 }
 #clickinfo{
     color: #ccc !important;

@@ -7,7 +7,6 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "d3": "^6.6.0",
-    "d3-celestial": "^0.7.35",
     "plotly.js": "^1.47.4",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -15,7 +14,7 @@
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1"
   },
-  "scripts": { 
+  "scripts": {
     "start": "react-scripts --max_old_space_size=4096 start",
     "build": "react-scripts --max_old_space_size=4096 build",
     "test": "react-scripts test",

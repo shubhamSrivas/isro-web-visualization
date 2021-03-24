@@ -1,6 +1,7 @@
 # ISRO Web-App For Xray Binary Visualization
 
 This project was made to visualize the data of high mass xray binaries and low mass xray binaries. It uses plotly.js.
+Site is deployed at https://605b6d184718491261af6d9b--agitated-mcclintock-80e407.netlify.app/
 
 ## Starting the app
 

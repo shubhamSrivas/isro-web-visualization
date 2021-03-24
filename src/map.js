@@ -15,6 +15,7 @@ import {
 } from "./constants";
 
 let details0 = [], details1 = [], details2 = [], details3 = [];
+let urls0 = [], urls1 = [], urls2 = [], urls3 = [];
 
 // Map
 class Map extends Component {
@@ -37,7 +38,7 @@ class Map extends Component {
           mags have the info that if the star is lmxb or hmxb
           hovs have the hover text
         */
-        csv("https://gist.githubusercontent.com/shubhamSrivas/4ad348e4ae6df449a6c1e957bfb246d9/raw/ce2bcf5bb4e0558e29d0b166d11755fec1547e04/totxbcatalogue.csv").then(data => {
+        csv("https://gist.githubusercontent.com/shubhamSrivas/4ad348e4ae6df449a6c1e957bfb246d9/raw/bf7e01430a0aa9e23d18161bb7da770182066344/totxbcatalogue.csv").then(data => {
             console.log(data);
             //for the high mass observed ones
             var ras0 = [], decs0 = [], mags0 = [], hovs0 = [];
@@ -68,7 +69,7 @@ class Map extends Component {
                 // Dec
                 var dec_tmp = parseFloat(data[i].dec);
 
-                //Publications
+                // Publications
                 var publications;
                 try {
                     publications = JSON.parse(data[i].references);
@@ -82,7 +83,17 @@ class Map extends Component {
                             publications.push(tmp); tmp = "";
                         }
                         else tmp = tmp + cur[j];
+                    }
+                }
 
+                //related urls
+                var url;
+                try{
+                    url=(JSON.parse(data[i].url));
+                }
+                catch(e){
+                    url=[];
+                }
                 // sets the hover text
                 var hovertext_tmp = "<b>" + data[i].name + "</b><br>(<b> Radius of Ascension: </b>" + ra_txt.toFixed(2) * -1 + "°,<b> Declination: </b>" + dec_tmp.toFixed(2) + "° )<br><b>Observed by Astrosat: </b>" + str;
                 var detailtext_tmp = hovertext_tmp;
@@ -109,6 +120,7 @@ class Map extends Component {
                         mags2.push(magnitude);
                         hovs2.push(hovertext_tmp);
                         details2.push(detailtext_tmp);
+                        urls2.push(url);
                     }
                     else {
                         ras3.push(ra_tmp);
@@ -116,6 +128,7 @@ class Map extends Component {
                         mags3.push(magnitude);
                         hovs3.push(hovertext_tmp);
                         details3.push(detailtext_tmp);
+                        urls3.push(url);
                     }
                 }
                 else {
@@ -125,6 +138,7 @@ class Map extends Component {
                         mags0.push(magnitude);
                         hovs0.push(hovertext_tmp);
                         details0.push(detailtext_tmp);
+                        urls0.push(url);
                     }
                     else {
                         ras1.push(ra_tmp);
@@ -132,6 +146,7 @@ class Map extends Component {
                         mags1.push(magnitude);
                         hovs1.push(hovertext_tmp);
                         details1.push(detailtext_tmp);
+                        urls1.push(url);
                     }
                 }
             }
@@ -223,20 +238,57 @@ class Map extends Component {
                         arrangement: 'perpendicular',
                         showlegend: false
                     }]
+            });
             })
-        });
     }
 
-    /*Function to display the info of a clicked star so that info can be copied */
+/*Function to display the info of a clicked star so that info can be copied */
     handleClick = (e) => {
+        console.log(e);
         var idx = e.points[0].pointIndex;
         var name = e.points[0].data.name;
         console.log(e.points[0].data)
         var detail;
-        if (name === "HMXB Not Observed") detail = details1[idx];
-        else if(name === "HMXB Observed") detail = details0[idx];
-        else if(name === "LMXB Not Observed") detail = details3[idx];
-        else detail = details2[idx];
+        if (name === "HMXB Not Observed"){
+             detail = details1[idx];
+             if(urls1[idx].length>0){
+                 detail+="<b>Suggested Readings:</b><br>";
+             }
+             for(let i=0;i<urls1[idx].length;i++){
+                let j=i+1;
+                detail+= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style=\"color:white\" href=\""+urls1[idx][i]+"\">Publication"+j+"</a><br>";
+             }
+        }
+        else if(name === "HMXB Observed"){ 
+            detail = details0[idx];
+            if(urls0[idx].length>0){
+                detail+="<b>Suggested Readings:</b><br>";
+            }
+            for(let i=0;i<urls0[idx].length;i++){
+                let j=i+1;
+                detail+="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style=\"color:white\" href=\""+urls0[idx][i]+"\">Publication"+j+"</a><br>";
+            }
+        }
+        else if(name === "LMXB Not Observed"){ 
+            detail = details3[idx];
+            if(urls3[idx].length>0){
+                detail+="<b>Suggested Readings:</b><br>";
+            }
+            for(let i=0;i<urls3[idx].length;i++){
+                let j=i+1;
+                detail+="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style=\"color:white\" href=\""+urls3[idx][i]+"\">Publication"+j+"</a><br>";
+            }
+        }
+        else {
+            detail = details2[idx];
+            if(urls2[idx].length>0){
+                detail+="<b>Suggested Readings:</b><br>";
+            }
+            for(let i=0;i<urls2[idx].length;i++){
+                let j=i+1;
+                detail+="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style=\"color:white\" href=\""+urls2[idx][i]+"\">Publication"+j+"</a><br>";
+            }
+        }
         document.getElementById('infoarea').innerHTML = `<div id="detail">${detail}</div>`;
         window.scrollBy(0, document.body.scrollHeight || document.documentElement.scrollHeight)
     }
@@ -274,18 +326,8 @@ class Map extends Component {
                         </div>
                     </div>
 
-                    <div id="infoarea">
-                    </div>
-                    <Plot
-                        style={{
-                            height: '100vh',
-                            width: '98vw',
-                            cursor: 'context-menu',
-                        }}
-                        data={this.state.mytrace}
-                        layout={mylayout}
-                        onClick={(data)=> this.handleClick(data)}
-                    />
+ 
+                    {this.state.showData === true ? null : <div id="infoarea"></div>}
                 </div>
             );
         }

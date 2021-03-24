@@ -63,7 +63,9 @@ var mylayout={
         font:{
             color: '#fff',
         },
-        // x: 0.8,
+        x: 0.1,
+        y: 1.12,
+        orientation: 'h',
         bordercolor: "#fff",
     },
 }

@@ -19,12 +19,13 @@
 [data-title="Lasso Select"]{
     display: none;
 }
-.geolayer .geo .bg{
+/* .geolayer .geo .bg{
     outline: 1px solid white;
-}
+} */
 .legendtoggle {
     z-index: -900;
     outline: none;
+}
 /* [data-title="Box Select"]{
     display: none;
 } */
@@ -37,7 +38,7 @@
 } */
 body{
     background-color: black;
-    /* overflow-x: hidden; */
+    overflow-x: hidden;
 }
 .hidden {
     display: none;
@@ -83,5 +84,6 @@ body{
 }
 
 .btn:hover {
-    background-color: coral;
+    background-color: blue;
+    color: white;
 }

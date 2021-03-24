@@ -19,6 +19,7 @@ Contains the info for making the galactic grid and configuration for the plot.
 
 ### map.js
 Contains the definition of map component and has three functions
+
     1. componentDidMount() : React lifecycle method which fetches the data of xray binaries stored at gist.github and after fetching the data the corresponding hover text and other info are pushed in an array for further use by plotly to plot and display the relevant data.
 
     2. handleClick() : This is a click event handler on each data point (xray binaries) when you click any star it gives the info in text form so that it could be copied and used as required.

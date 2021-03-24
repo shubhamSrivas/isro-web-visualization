@@ -1,3 +1,8 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 .svg-container{
     fill: black;
 }
@@ -10,17 +15,63 @@
 [data-title="Toggle show closest data on hover"]{
     display: none;
 }
-/* [data-title="Download plot as a png"]{
+[data-title="Lasso Select"]{
     display: none;
-} */
-rect{
+}
+.geolayer .geo .bg{
+    outline: 1px solid white;
+}
+.legendtoggle {
     z-index: -900;
+    outline: none;
 }
 body{
     background-color: black;
     overflow-x: hidden;
 }
-#clickinfo{
+.hidden {
+    display: none;
+}
+.section {
+    display: flex;
+}
+#heading {
+    color: white;
+    background: #222;
+    padding: 10px;
+}
+#tools {
+    width: 10%;
+    min-height: 100vh;
+    color: white;
+    background-color: #222;
+}
+#plots {
+    width: 90%;
+    min-height: 100vh;
+    color: black;
+    background-color: white;
+}
+#plot1 {
+    /* display: none; */
+    color: white;
+}
+#infoarea{
+    width: 70%;
+    margin: 0 auto;
+}
+#detail{
     color: #ccc !important;
-    margin-bottom: 20px;
+    text-align: left;
+    padding: 10px;
+    border: 2px solid grey;
+}
+.btn {
+    padding: 10px;
+    font-size: 16px;
+    margin: 20px;
+}
+
+.btn:hover {
+    background-color: coral;
 }

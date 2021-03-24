@@ -8,7 +8,7 @@ var grid_dec_hovtext = ['-90°','-60°','-30°','0°','+30°','+60°','+90°'];
 var grid_dec_textposition = ['top center', 'middle center', 'middle center', 'middle center', 'middle center', 'middle center', 'bottom center'];
 var mylayout={
     title:{
-        text: 'High Mass And Low Mass Xray Binaries',
+        text: '',
         font:{
             color: '#ddd',
         }
@@ -25,9 +25,6 @@ var mylayout={
     geo: {
         projection:{
             type: 'aitoff',
-            // rotation:{
-            //     lon: 90,
-            // },
         },
         center:{
             lon: 0,
@@ -60,7 +57,9 @@ var mylayout={
     legend: {
         font:{
             color: '#fff',
-        }
+        },
+        // x: 0.8,
+        bordercolor: "#fff",
     },
 }
 export {grid_ra_x,grid_ra_y,grid_dec_x,grid_dec_y,grid_ra_hovtext,grid_ra_textposition,grid_dec_hovtext,grid_dec_textposition,mylayout};
